@@ -6,7 +6,7 @@ public class Arrays {
      * @param arr the given array
      * @param item the item to be inserted
      * @param position the given postion to insert
-     * @return
+     * @return an inserted new array
      */
     public static int[] insert(int[] arr, int item, int position){
         int[] newArray = new int[arr.length + 1];
@@ -54,8 +54,8 @@ public class Arrays {
 
     /**
      * [3, 2 ,1] --> [3, 3, 3, 2, 2, 1]
-     * @param arr
-     * @return
+     * @param arr the given array
+     * @return a replicated new array
      */
     public static int[] replicate(int[] arr){
         int sum = 0;
@@ -73,17 +73,44 @@ public class Arrays {
         return newArr;
     }
 
-    public static void main(String[] args) {
-        int[] arr = {1,2,3,4};
-        Arrays.printIntArray(arr);
-        arr = Arrays.insert(arr,100,4);
-        Arrays.printIntArray(arr);
-        Arrays.reverse(arr);
-        Arrays.printIntArray(arr);
+    /**
+     * flatten {{1,2,3},{},{7,8}} --> {1,2,3,7,8}
+     * @param x 2D array
+     * @return 1D array
+     */
+    public static int[] flatten(int[][]x){
+        int totalLength = 0;
+        for(int[] arr: x){
+            totalLength+=arr.length;
+        }
+        int[] a =new int[totalLength];
+        int aIndex = 0;
+        for(int[] arr: x){
+            for(int item: arr){
+                a[aIndex] = item;
+                aIndex++;
+            }
+        }
+        return a;
+    }
 
-        int[] arr1 = {1,2,3,4};
-        arr1 = Arrays.replicate(arr1);
-        Arrays.printIntArray(arr1);
+    public static void main(String[] args) {
+        //int[] arr = {1,2,3,4};
+        //Arrays.printIntArray(arr);
+        //arr = Arrays.insert(arr,100,4);
+        //Arrays.printIntArray(arr);
+        //Arrays.reverse(arr);
+        //Arrays.printIntArray(arr);
+
+        //int[] arr1 = {1,2,3,4};
+        //arr1 = Arrays.replicate(arr1);
+        //Arrays.printIntArray(arr1);
+
+        int[][] twoDArray = {{1,2},{},{5,7,9,0}};
+        int [] oneDAaary = Arrays.flatten(twoDArray);
+        Arrays.printIntArray(oneDAaary);
+
+
 
     }
 }
