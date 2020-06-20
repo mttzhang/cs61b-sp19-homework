@@ -85,6 +85,9 @@ public class IntList {
      * @param B a given IntList
      */
     public static void dcatenate(IntList A, IntList B){
+        if(A == null){
+             A = IntList.copy(B);
+        }
         IntList temp = A;
         while(temp.rest!=null){
             temp = temp.rest;
@@ -98,9 +101,15 @@ public class IntList {
      * @param B a given IntList
      */
     public static IntList catenate(IntList A, IntList B){
+
+        IntList listB = IntList.copy(B);
+        if(A == null){
+            return listB;
+        }
+
         IntList listA = IntList.copy(A);
         IntList pointer = listA;
-        IntList listB = IntList.copy(B);
+
         while(pointer.rest != null){
             pointer = pointer.rest;
         }
@@ -115,6 +124,9 @@ public class IntList {
      * @return a new IntList
      */
     public static IntList copy(IntList A){
+        if(A == null){
+            return null;
+        }
         IntList tail;
         if(A.rest == null){
             return tail = new IntList(A.first, null);
@@ -131,6 +143,7 @@ public class IntList {
         }
         System.out.println(L.first);
         System.out.println("--------------");
+
     }
 
     public static void main(String[] args) {
