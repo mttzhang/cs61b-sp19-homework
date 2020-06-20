@@ -84,15 +84,17 @@ public class IntList {
      * @param A given IntList
      * @param B a given IntList
      */
-    public static void dcatenate(IntList A, IntList B){
+    public static IntList dcatenate(IntList A, IntList B){
         if(A == null){
-             A = IntList.copy(B);
+            return A = IntList.copy(B);
+
         }
         IntList temp = A;
         while(temp.rest!=null){
             temp = temp.rest;
         }
         temp.rest = B;
+        return A;
     }
 
     /**
