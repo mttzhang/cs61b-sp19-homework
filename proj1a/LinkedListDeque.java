@@ -56,12 +56,14 @@ public class LinkedListDeque<T> {
      * @param item the T item needed to be added
      */
     public void addFirst(T item) {
-        int s = this.size;
-        TNode nextNode = sentinel;
-        while (s != 0) {
-            nextNode = nextNode.front;
-            s--;
+        if (isEmpty()) {
+            TNode first = new TNode(item, sentinel, sentinel);
+            sentinel.front = first;
+            sentinel.next = first;
+            size++;
+            return;
         }
+        TNode nextNode = sentinel.next;
         TNode first = new TNode(item, sentinel, nextNode);
         sentinel.next = first;
         nextNode.front = first;
@@ -73,13 +75,14 @@ public class LinkedListDeque<T> {
      * @param item the T type item needed to be added
      */
     public void addLast(T item) {
-        int s = this.size;
-        TNode formerNode = sentinel;
-        while (s != 0) {
-            formerNode = formerNode.next;
-            s--;
+        if (isEmpty()) {
+            TNode last = new TNode(item, sentinel, sentinel);
+            sentinel.front = last;
+            sentinel.next = last;
+            size++;
+            return;
         }
-
+        TNode formerNode = sentinel.front;
         TNode last = new TNode(item, formerNode, sentinel);
         sentinel.front = last;
         formerNode.next = last;
