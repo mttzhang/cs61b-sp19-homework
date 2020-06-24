@@ -16,7 +16,7 @@ public class ArrayDeque<T> {
      * Creates an empty array deque.
      */
     public ArrayDeque() {
-        array = (T[]) new Object[3];
+        array = (T[]) new Object[8];
         size = 0;
         front = 0;
         rear = 0;
@@ -33,10 +33,23 @@ public class ArrayDeque<T> {
         rear = other.rear;
     }
 
-    private void checkReSize() {
+    private void checkReSizeUp() {
         ratio = (double) size / (double) array.length;
-        if (ratio > 0.5) {
-            T[] newArray = (T[]) new Object[size * 2];
+        if (ratio > 0.5 ) {
+            T[] newArray = (T[]) new Object[array.length * 2];
+            for (int index = 0; index < size; index++) {
+                newArray[index] = get(index);
+            }
+            front = 0;
+            rear = size - 1;
+            this.array = newArray;
+        }
+    }
+
+    private void checkReSizeDown() {
+        ratio = (double) size / (double) array.length;
+        if (ratio < 0.3 ) {
+            T[] newArray = (T[]) new Object[array.length / 2];
             for (int index = 0; index < size; index++) {
                 newArray[index] = get(index);
             }
@@ -71,7 +84,7 @@ public class ArrayDeque<T> {
             return;
         }
 
-        this.checkReSize();
+        this.checkReSizeUp();
         front--;
         this.updatePointer();
         array[front] = item;
@@ -89,7 +102,7 @@ public class ArrayDeque<T> {
             return;
         }
 
-        this.checkReSize();
+        this.checkReSizeUp();
         rear++;
         this.updatePointer();
         array[rear] = item;
@@ -137,6 +150,7 @@ public class ArrayDeque<T> {
             size--;
             return array[front];
         }
+        this.checkReSizeDown();
         size--;
         front++;
         this.updatePointer();
@@ -157,6 +171,7 @@ public class ArrayDeque<T> {
             size--;
             return array[rear];
         }
+        this.checkReSizeDown();
         size--;
         rear--;
         this.updatePointer();
@@ -179,5 +194,17 @@ public class ArrayDeque<T> {
         }
         index = Math.floorMod(index + front, array.length);
         return array[index];
+    }
+
+    public static void main(String[] args) {
+        ArrayDeque<Integer> arr = new ArrayDeque<Integer>();
+        arr.addLast(0);
+        arr.addLast(1);
+        arr.addLast(2);
+        arr.addLast(3);
+        arr.removeLast();
+        arr.removeLast();
+        arr.removeLast();
+        arr.removeLast();
     }
 }
