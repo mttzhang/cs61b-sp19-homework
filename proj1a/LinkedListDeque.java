@@ -179,7 +179,7 @@ public class LinkedListDeque<T> {
             return null;
         }
 
-        if(index == 0){
+        if (index == 0) {
             return (T) sentinel.next.item;
         }
 

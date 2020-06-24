@@ -4,11 +4,11 @@ public class ArrayDeque<T> {
     /**
      * instance variable
      */
-    public T[] array;
-    public int size;
-    public int front;
-    public int rear;
-    public double ratio;
+    private T[] array;
+    private int size;
+    private int front;
+    private int rear;
+    private double ratio;
 
     /**
      * constructor
@@ -29,25 +29,25 @@ public class ArrayDeque<T> {
      * @param other the array deque needed to be copied
      */
     public ArrayDeque(ArrayDeque other) {
-        System.arraycopy(other.array,0,array,0,other.array.length);
+        System.arraycopy(other.array, 0, array, 0, other.array.length);
         size = other.size;
         front = other.front;
         rear = other.rear;
     }
 
-    public void checkReSize() {
+    private void checkReSize() {
         ratio = size / array.length;
         if (ratio > 0.5) {
             T[] newArray = (T[]) new Objects[size * 2];
-            System.arraycopy(this.array,0,newArray,0,array.length);
+            System.arraycopy(this.array, 0, newArray, 0, array.length);
             this.array = newArray;
         }
     }
 
     private void updatePointer() {
-        if(rear >= array.length || front < 0) {
-            this.front = Math.floorMod(this.front,array.length);
-            this.rear = Math.floorMod(this.rear,array.length);
+        if (rear >= array.length || front < 0) {
+            this.front = Math.floorMod(this.front, array.length);
+            this.rear = Math.floorMod(this.rear, array.length);
         }
     }
 
@@ -63,7 +63,7 @@ public class ArrayDeque<T> {
      */
 
     public void addFirst(T item) {
-        if(size == 0) {
+        if (size == 0) {
             array[0] = item;
             front--;
             rear++;
@@ -72,9 +72,9 @@ public class ArrayDeque<T> {
         }
 
         this.checkReSize();
-        this.updatePointer();
-        array[front - 1] =item;
         front--;
+        this.updatePointer();
+        array[front] = item;
         size++;
     }
 
@@ -83,7 +83,7 @@ public class ArrayDeque<T> {
      * @param item the T type item needed to be added
      */
     public void addLast(T item) {
-        if(size == 0) {
+        if (size == 0) {
             array[0] = item;
             front--;
             rear++;
@@ -92,9 +92,9 @@ public class ArrayDeque<T> {
         }
 
         this.checkReSize();
-        this.updatePointer();
-        array[rear + 1] =item;
         rear++;
+        this.updatePointer();
+        array[rear] = item;
         size++;
     }
 
@@ -119,7 +119,7 @@ public class ArrayDeque<T> {
      * Once all the items have been printed, print out a new line.
      */
     public void printDeque() {
-        for(int index = front; index <= rear; index++) {
+        for (int index = front; index <= rear; index++) {
             System.out.print(array[index] + " ");
         }
         System.out.println("\n");
@@ -132,10 +132,10 @@ public class ArrayDeque<T> {
      * @return the item at the front of the deque
      */
     public T removeFirst() {
-        if(size == 0) {
+        if (size == 0) {
             return null;
         }
-        if(size == 1){
+        if (size == 1) {
             rear--;
         }
         size--;
@@ -151,10 +151,10 @@ public class ArrayDeque<T> {
      */
 
     public T removeLast() {
-        if(size == 0) {
+        if (size == 0) {
             return null;
         }
-        if(size == 1){
+        if (size == 1) {
             front++;
         }
         size--;
@@ -171,10 +171,10 @@ public class ArrayDeque<T> {
      * @return the item at the given index
      */
     public T get(int index) {
-        if(size == 0) {
+        if (size == 0) {
             return null;
         }
-        if(index < 0 || index > size - 1) {
+        if (index < 0 || index > size - 1) {
             return null;
         }
         index = Math.floorMod(index + front, array.length);
