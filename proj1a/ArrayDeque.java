@@ -18,8 +18,8 @@ public class ArrayDeque<T> {
     public ArrayDeque() {
         array = (T[]) new Object[3];
         size = 0;
-        front = 1;
-        rear = -1;
+        front = 0;
+        rear = 0;
     }
 
     /**
@@ -34,16 +34,20 @@ public class ArrayDeque<T> {
     }
 
     private void checkReSize() {
-        ratio = size / array.length;
+        ratio = (double) size / (double) array.length;
         if (ratio > 0.5) {
             T[] newArray = (T[]) new Object[size * 2];
-            System.arraycopy(this.array, 0, newArray, 0, array.length);
+            for (int index = 0; index < size; index++) {
+                newArray[index] = get(index);
+            }
+            front = 0;
+            rear = size - 1;
             this.array = newArray;
         }
     }
 
     private void updatePointer() {
-        if (rear >= array.length || front < 0) {
+        if (rear >= array.length || front < 0 || front >= array.length || rear < 0) {
             this.front = Math.floorMod(this.front, array.length);
             this.rear = Math.floorMod(this.rear, array.length);
         }
@@ -61,11 +65,8 @@ public class ArrayDeque<T> {
      */
 
     public void addFirst(T item) {
-        item = (T) item;
         if (size == 0) {
-            array[0] = item;
-            front--;
-            rear++;
+            array[front] = item;
             size++;
             return;
         }
@@ -82,11 +83,8 @@ public class ArrayDeque<T> {
      * @param item the T type item needed to be added
      */
     public void addLast(T item) {
-        item = (T) item;
         if (size == 0) {
-            array[0] = item;
-            front--;
-            rear++;
+            array[rear] = item;
             size++;
             return;
         }
@@ -119,8 +117,8 @@ public class ArrayDeque<T> {
      * Once all the items have been printed, print out a new line.
      */
     public void printDeque() {
-        for (int index = front; index <= rear; index++) {
-            System.out.print(array[index] + " ");
+        for (int index = 0; index < size; index++) {
+            System.out.print(get(index) + " ");
         }
         System.out.println("\n");
 
@@ -136,12 +134,13 @@ public class ArrayDeque<T> {
             return null;
         }
         if (size == 1) {
-            rear--;
+            size--;
+            return array[front];
         }
         size--;
         front++;
         this.updatePointer();
-        return array[front - 1];
+        return array[Math.floorMod(front - 1, array.length)];
     }
 
     /**
@@ -155,12 +154,13 @@ public class ArrayDeque<T> {
             return null;
         }
         if (size == 1) {
-            front++;
+            size--;
+            return array[rear];
         }
         size--;
         rear--;
         this.updatePointer();
-        return array[rear + 1];
+        return array[Math.floorMod(rear + 1, array.length)];
     }
 
     /**
