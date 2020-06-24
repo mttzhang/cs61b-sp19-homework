@@ -1,5 +1,3 @@
-import java.util.Objects;
-
 public class ArrayDeque<T> {
     /**
      * instance variable
@@ -18,7 +16,7 @@ public class ArrayDeque<T> {
      * Creates an empty array deque.
      */
     public ArrayDeque() {
-        array = (T[]) new Objects[8];
+        array = (T[]) new Object[3];
         size = 0;
         front = 1;
         rear = -1;
@@ -38,7 +36,7 @@ public class ArrayDeque<T> {
     private void checkReSize() {
         ratio = size / array.length;
         if (ratio > 0.5) {
-            T[] newArray = (T[]) new Objects[size * 2];
+            T[] newArray = (T[]) new Object[size * 2];
             System.arraycopy(this.array, 0, newArray, 0, array.length);
             this.array = newArray;
         }
@@ -63,6 +61,7 @@ public class ArrayDeque<T> {
      */
 
     public void addFirst(T item) {
+        item = (T) item;
         if (size == 0) {
             array[0] = item;
             front--;
@@ -83,6 +82,7 @@ public class ArrayDeque<T> {
      * @param item the T type item needed to be added
      */
     public void addLast(T item) {
+        item = (T) item;
         if (size == 0) {
             array[0] = item;
             front--;
