@@ -35,7 +35,7 @@ public class ArrayDeque<T> {
 
     private void checkReSizeUp() {
         ratio = (double) size / (double) array.length;
-        if (ratio > 0.5 ) {
+        if (ratio > 0.8 ) {
             T[] newArray = (T[]) new Object[array.length * 2];
             for (int index = 0; index < size; index++) {
                 newArray[index] = get(index);
