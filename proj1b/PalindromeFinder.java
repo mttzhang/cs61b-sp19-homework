@@ -1,0 +1,28 @@
+/**
+ * This class outputs all palindromes in the words file in the current directory.
+ */
+public class PalindromeFinder {
+    public static void main(String[] args) {
+        int minLength = 4;
+        In in = new In("/Library/Java/library-sp19/data/words.txt");
+        Palindrome palindrome = new Palindrome();
+
+        while (!in.isEmpty()) {
+            String word = in.readString();
+            if (word.length() >= minLength && palindrome.isPalindrome(word)) {
+                System.out.println(word);
+            }
+        }
+
+        In in1 = new In("/Library/Java/library-sp19/data/words.txt");
+        Palindrome palindrome1 = new Palindrome();
+        CharacterComparator cc = new OffByOne();
+
+        while (!in1.isEmpty()) {
+            String word = in1.readString();
+            if (word.length() >= minLength && palindrome1.isPalindrome(word, cc)) {
+                System.out.println(word);
+            }
+        }
+    }
+}
