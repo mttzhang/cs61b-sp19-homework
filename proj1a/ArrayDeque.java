@@ -22,20 +22,23 @@ public class ArrayDeque<T> {
         rear = 0;
     }
 
+    /* autograder 2018 doesn't allow this constructor :(
     /**
      * Creates a deep copy of other.
      * @param other the array deque needed to be copied
      */
+    /*
     public ArrayDeque(ArrayDeque other) {
         System.arraycopy(other.array, 0, array, 0, other.array.length);
         size = other.size;
         front = other.front;
         rear = other.rear;
     }
+    */
 
     private void checkReSizeUp() {
         ratio = (double) size / (double) array.length;
-        if (ratio > 0.8 ) {
+        if (ratio > 0.8) {
             T[] newArray = (T[]) new Object[array.length * 2];
             for (int index = 0; index < size; index++) {
                 newArray[index] = get(index);
@@ -48,7 +51,7 @@ public class ArrayDeque<T> {
 
     private void checkReSizeDown() {
         ratio = (double) size / (double) array.length;
-        if (ratio < 0.3 ) {
+        if (ratio < 0.3) {
             T[] newArray = (T[]) new Object[array.length / 2];
             for (int index = 0; index < size; index++) {
                 newArray[index] = get(index);
@@ -194,17 +197,5 @@ public class ArrayDeque<T> {
         }
         index = Math.floorMod(index + front, array.length);
         return array[index];
-    }
-
-    public static void main(String[] args) {
-        ArrayDeque<Integer> arr = new ArrayDeque<Integer>();
-        arr.addLast(0);
-        arr.addLast(1);
-        arr.addLast(2);
-        arr.addLast(3);
-        arr.removeLast();
-        arr.removeLast();
-        arr.removeLast();
-        arr.removeLast();
     }
 }

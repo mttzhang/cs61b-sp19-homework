@@ -35,7 +35,7 @@ public class LinkedListDeque<T> {
      * Creates a deep copy of other
      * @param other the LinkedListDeque needed to be copied
      */
-    public LinkedListDeque(LinkedListDeque other) {
+    private LinkedListDeque(LinkedListDeque other) {
         sentinel = new TNode(null, sentinel, sentinel);
         this.size = 0;
         int s = other.size;
