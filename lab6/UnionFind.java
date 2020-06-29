@@ -38,7 +38,7 @@ public class UnionFind {
         validate(v1);
         validate(v2);
 
-        return find(1) == find(2);
+        return find(v1) == find(v2);
     }
 
     /* Connects two elements v1 and v2 together. v1 and v2 can be any valid 
@@ -55,8 +55,20 @@ public class UnionFind {
         int root1 = find(v1);
         int root2 = find(v2);
 
-        items[root1] = root2;
-        items[root2] = -(sizeOf(v1) + sizeOf(v2));
+        int size1 = sizeOf(v1);
+        int size2 = sizeOf(v2);
+        int newSize = size1 + size2;
+
+        //size1 > size2
+        if (parent(root1) < parent(root2)) {
+            items[root2] = root1;
+            items[root1] = -(newSize);
+        } else {
+            items[root1] = root2;
+            items[root2] = -(newSize);
+        }
+
+
     }
 
     /* Returns the root of the set V belongs to. Path-compression is employed
@@ -68,6 +80,17 @@ public class UnionFind {
             root = parent(root);
         }
         return root;
+    }
+
+    /**
+     * help method to print out the whole array list
+     */
+    public void printUF() {
+        System.out.println("----------");
+        for (int i :items) {
+            System.out.print(i + " ");
+        }
+        System.out.println("\n----------");
     }
 
 }
