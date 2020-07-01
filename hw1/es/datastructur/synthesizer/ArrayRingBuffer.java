@@ -86,7 +86,7 @@ public class ArrayRingBuffer<T> implements BoundedQueue<T> {
      */
     @Override
     public Iterator<T> iterator() {
-        return null;
+        return new BufferIterator();
     }
 
     private class BufferIterator implements Iterator<T> {
