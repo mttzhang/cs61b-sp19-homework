@@ -42,7 +42,8 @@ public class PercolationStats {
         for (double threshold : thresholds) {
             sum += Math.pow((threshold - mean), 2);
         }
-        return sum / (thresholds.length - 1);
+        double sigma2 = sum / (thresholds.length - 1);
+        return Math.sqrt(sigma2);
     }
 
     // low endpoint of 95% confidence interval
@@ -56,4 +57,5 @@ public class PercolationStats {
     public double confidenceHigh() {
         return mean() + (1.96 * stddev()) / Math.sqrt(thresholds.length);
     }
+
 }
