@@ -17,7 +17,7 @@ public class PercolationStats {
             while (!p.percolates()) {
                 p.open(StdRandom.uniform(N), StdRandom.uniform(N));
             }
-            double threshold = p.numberOfOpenSites() / N * N;
+            double threshold = p.numberOfOpenSites() / (N * N);
             thresholds[t] = threshold;
         }
 
