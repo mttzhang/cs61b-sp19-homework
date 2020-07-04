@@ -5,12 +5,13 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
     // create N-by-N grid, with all sites initially blocked
-    int n;
-    WeightedQuickUnionUF grid;
-    boolean[] isOpen;
-    int upDotIndex;
-    int downDotIndex;
-    int size;
+    private int n;
+    private WeightedQuickUnionUF grid;
+    private WeightedQuickUnionUF gridOnlyTop;
+    private boolean[] isOpen;
+    private int upDotIndex;
+    private int downDotIndex;
+    private int size;
 
     public Percolation(int N) {
         if (N <= 0) {
@@ -21,6 +22,7 @@ public class Percolation {
         size = 0;
 
         grid = new WeightedQuickUnionUF(N * N + 2);
+        gridOnlyTop = new WeightedQuickUnionUF(N * N + 1);
         upDotIndex = N * N;
         downDotIndex = upDotIndex + 1;
 
@@ -47,6 +49,7 @@ public class Percolation {
         size++;
         if (index < n) {
             grid.union(index, upDotIndex);
+            gridOnlyTop.union(index, n * n);
         }
         if ((n - 1) * n <= index) {
             grid.union(index, downDotIndex);
@@ -56,6 +59,7 @@ public class Percolation {
         for (int i : neighbor) {
             if (i > -1 && isOpen(i)) {
                 grid.union(index, i);
+                gridOnlyTop.union(index, i);
             }
         }
     }
@@ -96,7 +100,8 @@ public class Percolation {
     // is the site (row, col) full?
     public boolean isFull(int row, int col) {
         int index = xyTo1D(row, col);
-        boolean isFull = grid.connected(index, upDotIndex);
+        //grid.
+        boolean isFull = gridOnlyTop.connected(index, upDotIndex);
 
         return isFull;
     }
@@ -109,6 +114,10 @@ public class Percolation {
     // does the system percolate?
     public boolean percolates() {
         return grid.connected(upDotIndex, downDotIndex);
+    }
+
+    public static void main(String[] args) {
+
     }
 
 }

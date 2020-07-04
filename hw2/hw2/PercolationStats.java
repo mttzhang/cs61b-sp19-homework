@@ -4,7 +4,7 @@ import edu.princeton.cs.algs4.StdRandom;
 
 public class PercolationStats {
 
-    double[] thresholds;
+    private double[] thresholds;
 
     // perform T independent experiments on an N-by-N grid
     public PercolationStats(int N, int T, PercolationFactory pf) {
@@ -17,7 +17,7 @@ public class PercolationStats {
             while (!p.percolates()) {
                 p.open(StdRandom.uniform(N), StdRandom.uniform(N));
             }
-            double threshold = p.size / N * N;
+            double threshold = p.numberOfOpenSites() / N * N;
             thresholds[t] = threshold;
         }
 
@@ -55,5 +55,6 @@ public class PercolationStats {
     public double confidenceHigh() {
         return mean() + (1.96 * stddev()) / Math.sqrt(thresholds.length);
     }
+
 
 }
