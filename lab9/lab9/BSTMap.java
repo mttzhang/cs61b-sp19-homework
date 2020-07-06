@@ -48,8 +48,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         if (p.left == null && p.right == null) {
             if (p.key.equals(key)) {
                 return p.value;
-            }
-            else {
+            } else {
                 return null;
             }
         }
@@ -74,7 +73,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         if (root.key.equals(key)) {
             return root.value;
         }
-        return getHelper(key,root);
+        return getHelper(key, root);
     }
 
     /** Returns a BSTMap rooted in p with (KEY, VALUE) added as a key-value mapping.
@@ -82,17 +81,17 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
      */
     private Node putHelper(K key, V value, Node p) {
         if (p == null) {
-            return new Node(key,value);
+            return new Node(key, value);
         }
         if (key.compareTo(p.key) < 0) {
             if (p.left == null) {
-                p.left = new Node (key, value);
+                p.left = new Node(key, value);
                 return p;
             }
             p.left = putHelper(key, value, p.left);
         } else {
-            if(p.right == null) {
-                p.right = new Node (key, value);
+            if (p.right == null) {
+                p.right = new Node(key, value);
                 return p;
             }
             p.right = putHelper(key, value, p.right);
@@ -128,7 +127,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         Set<K> keySetJ = new HashSet<>();
         keySet.add(n.key);
         if (n.left == null && n.right == null) {
-         return keySet;
+            return keySet;
         }
         if (n.left != null) {
             n = n.left;
@@ -136,7 +135,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
             keySet.addAll(keySetJ);
 
         }
-        if(n.right != null) {
+        if (n.right != null) {
             n = n.right;
             keySetJ = keySetHelper(n);
             keySet.addAll(keySetJ);
