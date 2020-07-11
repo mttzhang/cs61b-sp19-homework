@@ -13,7 +13,7 @@ public class MazeBreadthFirstPaths extends MazeExplorer {
     private int t;
     private boolean targetFound;
     private Maze maze;
-    private ArrayListDeque <Integer> list;
+    private ArrayListDeque<Integer> list;
 
     private class ArrayListDeque<T> {
 
@@ -23,7 +23,7 @@ public class MazeBreadthFirstPaths extends MazeExplorer {
         int capacity;
         T[] contents;
 
-        public ArrayListDeque() {
+        ArrayListDeque() {
             capacity = 16;
             contents = (T[]) new Object[capacity];
             size = 0;
@@ -31,7 +31,7 @@ public class MazeBreadthFirstPaths extends MazeExplorer {
             first = 0;
         }
 
-        public ArrayListDeque(int c) {
+        ArrayListDeque(int c) {
             capacity = c;
             contents = (T[]) new Object[capacity];
             size = 0;
@@ -67,7 +67,7 @@ public class MazeBreadthFirstPaths extends MazeExplorer {
             }
             return false;
         }
-        public boolean isEmpty(){
+        public boolean isEmpty() {
             return size == 0;
         }
         public int updateIndex(int i) {
@@ -78,7 +78,7 @@ public class MazeBreadthFirstPaths extends MazeExplorer {
             first++;
             first = updateIndex(first);
             size--;
-            if(isEmpty()) {
+            if (isEmpty()) {
                 first--;
             }
             //resize();
@@ -151,10 +151,7 @@ public class MazeBreadthFirstPaths extends MazeExplorer {
             bfs(curr);
 
         }
-
-        // TODO: Your code here. Don't forget to update distTo, edgeTo, and marked, as well as call announce()
     }
-
 
     @Override
     public void solve() {
