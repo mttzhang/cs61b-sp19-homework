@@ -75,7 +75,7 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T> {
      * resize the array.
      */
     private void reSizeUp() {
-        if ((double) size() / items.length > 0.8) {
+        if ((double) size() / items.length > 0.7) {
             Node[] temp = new ArrayHeapMinPQ.Node[2 * items.length];
             for (int i = 0; i <= size(); i++) {
                 temp[i] = items[i];
