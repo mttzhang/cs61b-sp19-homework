@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 /**
  * This class acts as a helper for the RoutingAPIHandler.
- * @author Josh Hug, Mengting Zhang
+ * @author Josh Hug, Mengting Zhang.
  */
 public class Router {
 
