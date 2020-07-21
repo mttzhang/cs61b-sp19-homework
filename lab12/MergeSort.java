@@ -77,7 +77,7 @@ public class MergeSort {
         Queue<Item> firstHalf = new Queue<>();
         Queue<Item> lastHalf = new Queue<>();
 
-        if (items.size() == 1) {
+        if (items.size() <= 1) {
             return items;
         }
         for (int i = 0; i < items.size(); i++) {
